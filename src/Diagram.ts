@@ -7,7 +7,7 @@ export default class Diagram {
   public main: Group;
   private title: string;
 
-  constructor(title: string) {
+  constructor(title?: string) {
     this.main = new Group(StyleSet.getInitialStyleSet());
     this.title = title || "<untitled>";
   }
