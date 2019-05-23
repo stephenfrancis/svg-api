@@ -15,7 +15,7 @@ console.log(JSON.stringify(d.main.getExtremes()));
 console.log(d.getMarkup());
 
 const FileManager = require("./src/FileManager").default;
-const fm = new FileManager();
+const fm = new FileManager("./build/");
 
 fm.saveAsHTML(d, "example");
 fm.saveAsSVG (d, "example");

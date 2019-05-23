@@ -63,3 +63,4 @@ src/**/*.js
 
 # output
 dist/**
+build/**
