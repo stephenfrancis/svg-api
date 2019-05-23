@@ -24,10 +24,11 @@ export default class Rectangle extends Element {
 
   public getMarkup(): string {
     return "<rect"
-     + " x=" + (this.getX() - (this.width  / 2))
-     + " y=" + (this.getY() - (this.height / 2))
-     + " width=" + this.width
-     + " height=" + this.height
+     + " x='" + (this.getX() - (this.width  / 2)) + "'"
+     + " y='" + (this.getY() - (this.height / 2)) + "'"
+     + " width='"  + this.width  + "'"
+     + " height='" + this.height + "'"
+     + " " + this.getStyleSet().getStyleDefinition()
      + " />";
   }
 

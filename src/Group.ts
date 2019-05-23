@@ -1,20 +1,34 @@
 
 import Element from "./Element";
+import Ellipse from "./Ellipse";
 import Rectangle from "./Rectangle";
+import StraightLine from "./StraightLine";
+import StyleSet from "./StyleSet";
+import Text from "./Text";
 import * as Types from "./Types";
 
 type ElementOrGroup = Element | Group;
 
 export default class Group {
+  private current_styleset: StyleSet;
   private elements: ElementOrGroup[];
 
-  constructor() {
+  constructor(current_styleset: StyleSet) {
+    this.current_styleset = current_styleset;
     this.elements = [];
   }
 
 
-  public addGroup(): Group {
-    const group = new Group();
+  public addEllipse(x_pos: number, y_pos: number, x_rad: number, y_rad: number): Ellipse {
+    const element = new Ellipse(x_pos, y_pos, x_rad, y_rad);
+    element.setStyleSet(this.current_styleset);
+    this.elements.push(element);
+    return element;
+  }
+
+
+  public addGroup(current_styleset?: StyleSet): Group {
+    const group = new Group(current_styleset || this.current_styleset);
     this.elements.push(group);
     return group;
   }
@@ -22,13 +36,24 @@ export default class Group {
 
   public addRectangle(x_pos: number, y_pos: number, width: number, height: number): Rectangle {
     const element = new Rectangle(x_pos, y_pos, width, height);
+    element.setStyleSet(this.current_styleset);
     this.elements.push(element);
     return element;
   }
 
 
-  public getMarkup(): string {
-    return "<g>" + this.elements.map((element: Element) => element.getMarkup()) + "</g>";
+  public addStraightLine(x_from: number, y_from: number, x_to: number, y_to: number): StraightLine {
+    const element = new StraightLine(x_from, y_from, x_to, y_to);
+    element.setStyleSet(this.current_styleset);
+    this.elements.push(element);
+    return element;
+  }
+
+
+  public addText(x_pos: number, y_pos: number, text: string): Text {
+    const element = new Text(x_pos, y_pos, text);
+    this.elements.push(element);
+    return element;
   }
 
 
@@ -47,6 +72,21 @@ export default class Group {
       extremes.y_max = Math.max(extremes.y_max, elem_extr.y_max);
     });
     return extremes;
+  }
+
+
+  public getMarkup(): string {
+    return "<g>" + this.elements.map((element: Element) => element.getMarkup()).join("") + "</g>";
+  }
+
+
+  public getNewElementStyleSet(): StyleSet {
+    return this.current_styleset;
+  }
+
+
+  public setNewElementStyleSet(arg: StyleSet): void {
+    this.current_styleset = arg;
   }
 
 }

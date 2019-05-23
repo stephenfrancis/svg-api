@@ -1,7 +1,9 @@
 
+import StyleSet from "./StyleSet";
 import * as Types from "./Types";
 
 export default class Element {
+  private styleset: StyleSet;
   private x_pos: number;
   private y_pos: number;
 
@@ -21,6 +23,11 @@ export default class Element {
   }
 
 
+  public getStyleSet(): StyleSet {
+    return this.styleset;
+  }
+
+
   public getX(): number {
     return this.x_pos;
   }
@@ -28,6 +35,11 @@ export default class Element {
 
   public getY(): number {
     return this.y_pos;
+  }
+
+
+  public setStyleSet(arg: StyleSet): void {
+    this.styleset = arg;
   }
 
 
