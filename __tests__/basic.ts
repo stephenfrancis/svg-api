@@ -1,5 +1,6 @@
 
 import Diagram from "../src/Diagram";
+import FileManager from "../src/FileManager";
 
 test("basic", () => {
 
@@ -47,15 +48,14 @@ test("basic", () => {
 
   expect(d.getMarkup()).toBe(
     "<svg width='85' height='90' version='1.1' xmlns='http://www.w3.org/2000/svg'><g>"
-    + "<rect x='-5' y='0' width='30' height='40' stroke='#000000' stroke-width='1' fill='#808080' />"
-    + "<rect x='15' y='30' width='50' height='20' stroke='#000000' stroke-width='1' fill='#808080' />"
-    + "<line x1='-10' y1='30' x2='40' y2='80' stroke='#000000' stroke-width='1' fill='#808080' />"
+    + "<rect x='-5' y='0' width='30' height='40' stroke='#000000' stroke-width='1px' fill='#808080' />"
+    + "<rect x='15' y='30' width='50' height='20' stroke='#000000' stroke-width='1px' fill='#808080' />"
+    + "<line x1='-10' y1='30' x2='40' y2='80' stroke='#000000' stroke-width='1px' fill='#808080' />"
     + "</g></svg>");
 
-  // const FileManager = require("./src/FileManager").default;
-  // const fm = new FileManager("./build/");
+  const fm = new FileManager("./build/");
 
-  // fm.saveAsHTML(d, "example");
-  // fm.saveAsSVG (d, "example");
+  fm.saveAsHTML(d, "example");
+  fm.saveAsSVG (d, "example");
 
 });

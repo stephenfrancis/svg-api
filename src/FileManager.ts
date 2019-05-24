@@ -25,7 +25,7 @@ export default class FileManager {
   private path: string;
   private encoding: string;
 
-  constructor(path, encoding) {
+  constructor(path?: string, encoding?: string) {
     this.path = path || "";
     this.encoding = encoding || "utf8";
   }
