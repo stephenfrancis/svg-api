@@ -29,6 +29,7 @@ export default class Ellipse extends Element {
       + " rx='" + this.x_rad + "'"
       + " ry='" + this.y_rad + "'"
       + " " + this.getStyleSet().getStyleDefinition()
+      + this.getTransformMarkup()
       + " />";
   }
 

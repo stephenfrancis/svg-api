@@ -35,9 +35,10 @@ export default class Text extends Element {
 
   public getMarkup(): string {
     return "<text"
-     + " x=" + (this.getX() - (this.estimateWidth()  / 2))
-     + " y=" + (this.getY() - (this.estimateHeight() / 2))
+     + " x='" + (this.getX() - (this.estimateWidth()  / 2)) + "'"
+     + " y='" + (this.getY() - (this.estimateHeight() / 2)) + "'"
      + " " + this.getStyleSet().getStyleDefinition()
+     + this.getTransformMarkup()
      + " >" + encodeURIComponent(this.text) + "</text>";
   }
 

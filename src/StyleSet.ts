@@ -1,18 +1,19 @@
 
-type AttributeName = "fill" | "fill-opacity" | "stroke" | "stroke-width";
+type AttributeName = "fill" | "fill-opacity" | "font-size" | "stroke" | "stroke-width";
 type AttributeSet = { [A in AttributeName]: ValidationName };
 type ValidationName = "colour" | "length" | "percentage";
 type ValidationSet = { [valid_set: string]: RegExp[] };
 
 const attr_set: AttributeSet = {
-  "fill": "colour",
+  "fill"        : "colour",
   "fill-opacity": "percentage",
-  "stroke": "colour",
+  "font-size"   : "length",
+  "stroke"      : "colour",
   "stroke-width": "length",
 };
 
 const val_set: ValidationSet = {
-  "colour": [ /^#[\da-fA-F]{3}$/, /^#[\da-fA-F]{6}$/, /rgb\(\d{1,2},\d{1,2},\d{1,2}\)$/ ],
+  "colour": [ /^#[\da-fA-F]{3}$/, /^#[\da-fA-F]{6}$/, /rgb\(\d{1,2},\d{1,2},\d{1,2}\)$/, /^none$/ ],
   "length": [ /^\d+px$/ ],
   "percentage": [ /^\d+(\.\d+)?%$/ ],
 };
@@ -21,8 +22,8 @@ const val_set: ValidationSet = {
 export default class StyleSet {
   private attributes: { [A in AttributeName]?: string };
 
-  constructor() {
-    this.attributes = {};
+  constructor(initial_attributes?: { [A in AttributeName]?: string }) {
+    this.attributes = initial_attributes || {};
   }
 
 
@@ -32,11 +33,11 @@ export default class StyleSet {
 
 
   public static getInitialStyleSet(): StyleSet {
-    const initial_styleset: StyleSet = new StyleSet();
-    initial_styleset.setAttribute("stroke", "#000000");
-    initial_styleset.setAttribute("stroke-width", "1px");
-    initial_styleset.setAttribute("fill", "#808080");
-    return initial_styleset;
+    return new StyleSet({
+      "stroke"      : "#000000",
+      "stroke-width": "1px",
+      "fill"        : "#808080",
+    });
   }
 
 
@@ -73,7 +74,7 @@ export default class StyleSet {
       throw new Error(`unrecognized style attribute name: ${attr_name}`);
     }
     if (!this.validateAs(val_type, value)) {
-      throw new Error(`value ${value} of style attribute: ${attr_name} is not a valid ${val_type}`);
+      throw new Error(`value '${value}' of style attribute: ${attr_name} is not a valid ${val_type}`);
     }
   }
 

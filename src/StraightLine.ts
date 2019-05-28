@@ -30,6 +30,7 @@ export default class StriaghtLine extends Element {
      + " x2='" + this.x_to + "'"
      + " y2='" + this.y_to + "'"
      + " " + this.getStyleSet().getStyleDefinition()
+     + this.getTransformMarkup()
      + " />";
   }
 

@@ -1,9 +1,11 @@
 
 import StyleSet from "./StyleSet";
+import Transform from "./Transform";
 import * as Types from "./Types";
 
 export default class Element {
   private styleset: StyleSet;
+  private transform: Transform;
   private x_pos: number;
   private y_pos: number;
 
@@ -28,6 +30,22 @@ export default class Element {
   }
 
 
+  public getTransform(): Transform {
+    if (!this.transform) {
+      this.transform = new Transform();
+    }
+    return this.transform;
+  }
+
+
+  public getTransformMarkup(): string {
+    if (!this.transform) {
+      return "";
+    }
+    return " transform='" + this.transform.getMarkup() + "'";
+  }
+
+
   public getX(): number {
     return this.x_pos;
   }
@@ -40,6 +58,11 @@ export default class Element {
 
   public setStyleSet(arg: StyleSet): void {
     this.styleset = arg;
+  }
+
+
+  public setTransform(arg: Transform): void {
+    this.transform = arg;
   }
 
 

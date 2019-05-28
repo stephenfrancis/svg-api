@@ -29,6 +29,7 @@ export default class Rectangle extends Element {
      + " width='"  + this.width  + "'"
      + " height='" + this.height + "'"
      + " " + this.getStyleSet().getStyleDefinition()
+     + this.getTransformMarkup()
      + " />";
   }
 
