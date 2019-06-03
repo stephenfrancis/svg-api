@@ -1,5 +1,6 @@
 
 import Element from "./Element";
+import StyleSet from "./StyleSet";
 import * as Types from "./Types";
 
 export default class Path extends Element {
@@ -9,8 +10,8 @@ export default class Path extends Element {
   private x_cur: number;
   private y_cur: number;
 
-  constructor(x_pos: number, y_pos: number) {
-    super(x_pos, y_pos);
+  constructor(styleset: StyleSet, x_pos: number, y_pos: number) {
+    super(styleset, x_pos, y_pos);
     this.extremes = {
       x_min: x_pos,
       y_min: y_pos,

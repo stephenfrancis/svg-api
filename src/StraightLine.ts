@@ -1,13 +1,14 @@
 
 import Element from "./Element";
+import StyleSet from "./StyleSet";
 import * as Types from "./Types";
 
 export default class StriaghtLine extends Element {
   private x_to: number;
   private y_to: number;
 
-  constructor(x_pos: number, y_pos: number, x_to: number, y_to: number) {
-    super(x_pos, y_pos);
+  constructor(styleset: StyleSet, x_pos: number, y_pos: number, x_to: number, y_to: number) {
+    super(styleset, x_pos, y_pos);
     this.x_to = x_to;
     this.y_to = y_to;
   }

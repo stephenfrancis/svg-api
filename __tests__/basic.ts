@@ -47,10 +47,10 @@ test("basic", () => {
 
 
   expect(d.getMarkup()).toBe(
-    "<svg width='85' height='90' version='1.1' xmlns='http://www.w3.org/2000/svg'><g>"
-    + "<rect x='-5' y='0' width='30' height='40' stroke='#000000' stroke-width='1px' fill='#808080' />"
-    + "<rect x='15' y='30' width='50' height='20' stroke='#000000' stroke-width='1px' fill='#808080' />"
-    + "<line x1='-10' y1='30' x2='40' y2='80' stroke='#000000' stroke-width='1px' fill='#808080' />"
+    "<svg width='75' height='90' version='1.1' xmlns='http://www.w3.org/2000/svg'>\n<g>\n"
+    + "<rect x='-5' y='0' width='30' height='40' stroke='#000000' stroke-width='1px' fill='#808080' />\n"
+    + "<rect x='15' y='30' width='50' height='20' stroke='#000000' stroke-width='1px' fill='#808080' />\n"
+    + "<line x1='-10' y1='30' x2='40' y2='80' stroke='#000000' stroke-width='1px' fill='#808080' />\n"
     + "</g></svg>");
 
   const fm = new FileManager("./build/");

@@ -1,14 +1,15 @@
 
 import Element from "./Element";
 import Path from "./Path";
+import StyleSet from "./StyleSet";
 import * as Types from "./Types";
 
 export default class Arrowhead extends Element {
   private angle: number;
   private size: number;
 
-  constructor(x_pos: number, y_pos: number, angle: number, size?: number) {
-    super(x_pos, y_pos);
+  constructor(styleset: StyleSet, x_pos: number, y_pos: number, angle: number, size?: number) {
+    super(styleset, x_pos, y_pos);
     this.angle = angle;
     this.size = size || 10;
   }
@@ -24,7 +25,7 @@ export default class Arrowhead extends Element {
 
 
   public getMarkup(): string {
-    const path = new Path(this.getX(), this.getY());
+    const path = new Path(this.getStyleSet(), this.getX(), this.getY());
     path.lineToRelative( -this.size,   this.size     / 3);
     path.lineToRelative(          0, - this.size * 2 / 3);
     path.closePath();

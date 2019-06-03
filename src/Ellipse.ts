@@ -1,13 +1,14 @@
 
 import Element from "./Element";
+import StyleSet from "./StyleSet";
 import * as Types from "./Types";
 
 export default class Ellipse extends Element {
   private x_rad: number;
   private y_rad: number;
 
-  constructor(x_pos: number, y_pos: number, x_rad: number, y_rad: number) {
-    super(x_pos, y_pos);
+  constructor(styleset: StyleSet, x_pos: number, y_pos: number, x_rad: number, y_rad: number) {
+    super(styleset, x_pos, y_pos);
     this.x_rad = x_rad;
     this.y_rad = y_rad;
   }

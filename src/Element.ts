@@ -9,7 +9,8 @@ export default class Element {
   private x_pos: number;
   private y_pos: number;
 
-  constructor(x_pos: number, y_pos: number) {
+  constructor(styleset: StyleSet, x_pos: number, y_pos: number) {
+    this.styleset = styleset;
     this.x_pos = x_pos;
     this.y_pos = y_pos;
   }

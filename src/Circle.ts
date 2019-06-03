@@ -1,12 +1,13 @@
 
 import Element from "./Element";
+import StyleSet from "./StyleSet";
 import * as Types from "./Types";
 
 export default class Circle extends Element {
   private rad: number;
 
-  constructor(x_pos: number, y_pos: number, rad: number) {
-    super(x_pos, y_pos);
+  constructor(styleset: StyleSet, x_pos: number, y_pos: number, rad: number) {
+    super(styleset, x_pos, y_pos);
     this.rad = rad;
   }
 

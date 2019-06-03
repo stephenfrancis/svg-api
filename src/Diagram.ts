@@ -16,8 +16,8 @@ export default class Diagram {
   public getMarkup(): string {
     const extremes: Types.Extremes = this.main.getExtremes();
     return "<svg"
-     + " width='"  + (extremes.x_max - extremes.x_min + 10) + "'"
-     + " height='" + (extremes.y_max - extremes.y_min + 10) + "'"
+     + " width='"  + (extremes.x_max /*- extremes.x_min*/ + 10) + "'"
+     + " height='" + (extremes.y_max /*- extremes.y_min*/ + 10) + "'"
      + " version='1.1'"
      + " xmlns='http://www.w3.org/2000/svg'>"
      + this.main.getMarkup()

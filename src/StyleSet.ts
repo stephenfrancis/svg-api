@@ -32,12 +32,23 @@ export default class StyleSet {
   }
 
 
+  public getFontSize(): number {
+    return parseInt(this.getAttribute("font-size"), 10);
+  }
+
+
   public static getInitialStyleSet(): StyleSet {
     return new StyleSet({
       "stroke"      : "#000000",
       "stroke-width": "1px",
       "fill"        : "#808080",
+      "font-size"   : "16px",
     });
+  }
+
+
+  public getLineHeight(): number {
+    return parseInt(this.getAttribute("font-size"), 10);
   }
 
 
