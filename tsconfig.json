@@ -1,13 +1,14 @@
 
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
     "allowSyntheticDefaultImports": true,
     "lib" : [
       "es2015",
       "dom"
     ],
+    "module": "commonjs",
+    "outDir": "build/",
+    "target": "es5",
   },
   "exclude": [
     "node_modules",

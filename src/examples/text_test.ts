@@ -1,7 +1,7 @@
 
-import Diagram from "../src/Diagram";
-import FileManager from "../src/FileManager";
-import StyleSet from "../src/StyleSet";
+import Diagram from "../main/Diagram";
+import FileManager from "../main/FileManager";
+import StyleSet from "../main/StyleSet";
 
 const d: Diagram = new Diagram();
 

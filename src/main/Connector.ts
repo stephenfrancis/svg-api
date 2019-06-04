@@ -36,7 +36,7 @@ export default class Connector extends Element {
       return null;
     }
     const a = new Arrowhead(this.getStyleSet(), to_path_point[0], to_path_point[1],
-      Math.atan2(to_path_point[1] - from_path_point[1], to_path_point[0] - from_path_point[0]));
+      Math.atan2(to_path_point[1] - from_path_point[1], to_path_point[0] - from_path_point[0]) * 180 / Math.PI);
     return a.getMarkup();
   }
 
@@ -71,17 +71,25 @@ export default class Connector extends Element {
       + this.getStyleSet().getStyleDefinition()
       + this.getTransformMarkup()
       + ">";
-    let path = new Path(this.getStyleSet(), this.path_points[0][0], this.path_points[0][1]);
+    const path_styles = Object.assign({}, this.getStyleSet(), {
+      "fill": "none",
+    });
+    let path = new Path(new StyleSet(path_styles), this.path_points[0][0], this.path_points[0][1]);
     this.path_points.forEach((point: [ number, number ], index: number) => {
       if (index > 0) {
-        path.lineToAbsolute(point[0], point[1]);
+        if (this.path_style === "quad-bezier") {
+          path.quadraticBezierSmoothAbsolute(point[0], point[1]);
+        } else {
+          path.lineToAbsolute(point[0], point[1]);
+        }
       }
     });
     out += path.getMarkup();
     out += this.drawArrowHead(this.path_points[0], this.path_points[1], this.start_arrowhead);
-    out += this.drawArrowHead(this.path_points[this.path_points.length -1 ],
+    out += this.drawArrowHead(
+      this.path_points[this.path_points.length - 1],
       this.path_points[this.path_points.length - 2],
-      this.start_arrowhead);
+      this.end_arrowhead);
     out += "</g>";
     return out;
   }

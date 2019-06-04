@@ -1,6 +1,6 @@
 
-import Diagram from "../src/Diagram";
-import StyleSet from "../src/StyleSet";
+import Diagram from "../main/Diagram";
+import StyleSet from "../main/StyleSet";
 
 test("switch new element styleset", () => {
   const d: Diagram = new Diagram();

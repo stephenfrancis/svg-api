@@ -1,6 +1,6 @@
 
-import Diagram from "../src/Diagram";
-import FileManager from "../src/FileManager";
+import Diagram from "../main/Diagram";
+import FileManager from "../main/FileManager";
 
 test("positioned group", () => {
 
