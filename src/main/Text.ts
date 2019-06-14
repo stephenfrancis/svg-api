@@ -12,22 +12,39 @@ export default class Text extends Element {
   }
 
 
-  public static chopTextToFitWidth(text: string, font_size: number, width: number): string[] {
+  public static chopTextToFitWidth(text: string, font_size: number, width: number, word_wrap?: boolean): string[] {
     let out: string[] = [ "" ];
     let curr_length: number = 0;
+    let prev_split_posn: number = 0;
+    let last_space_posn: number = 0;
     if (!Number.isFinite(width / font_size) || (width / font_size) < 5) {
       throw new Error(`width (${width}) / font size (${font_size}) must be >= 5`);
     }
-    for (let i: number = 0; i < text.length; i += 1) {
+    const wordWrapIfRequired = () => {
+      if (word_wrap && (last_space_posn > prev_split_posn)) {
+        const split_index: number = last_space_posn - prev_split_posn;
+        out[out.length - 2] = out[out.length - 2].substr(0, split_index);
+        i = last_space_posn + 1;
+      }
+    }
+    let i: number = 0;
+    while (i < text.length) {
       const code = text.charCodeAt(i);
       const new_length: number = latin_glyph_widths[String(code)] || 5;
       if (curr_length + new_length > (width * 10 / font_size)) {
         out.push("");
         curr_length = 0;
+        wordWrapIfRequired();
+        prev_split_posn = i;
+      }
+      if (code === 32) {
+        last_space_posn = i;
       }
       out[out.length - 1] += text.substr(i, 1);
       curr_length += new_length;
+      i += 1
     }
+    // wordWrapIfRequired();
     return out;
   }
 

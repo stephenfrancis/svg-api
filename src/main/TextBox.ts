@@ -6,13 +6,17 @@ import Text from "./Text";
 import * as Types from "./Types";
 
 export default class TextBox extends Element {
+  private padding: number[];
   private text: string;
   private width: number;
+  private word_wrap: boolean;
 
   constructor(styleset: StyleSet, x_pos: number, y_pos: number, text: string, width?: number) {
     super(styleset, x_pos, y_pos);
     this.text = text;
+    this.padding = [ 5, 5, 5, 5, ];
     this.width = width || 150;
+    this.word_wrap = true;
   }
 
 
@@ -30,16 +34,16 @@ export default class TextBox extends Element {
 
   public getMarkup(): string {
     let out = "";
-    const text_parts: string[] = Text.chopTextToFitWidth(this.text,
-      this.getStyleSet().getFontSize(), this.getWidth());
+    const text_parts: string[] = this.getTextParts();
     const width: number = this.getWidth();
     const height: number = this.getHeight(text_parts.length);
     const rect = new Rectangle(this.getStyleSet(), this.getX(), this.getY(), width, height);
     rect.setStyleSet(this.getStyleSet());
     out += rect.getMarkup();
     for (let i = 0; i < text_parts.length; i += 1) {
-      const elem = new Text(this.getStyleSet(), this.getX() - (width / 2),
-        this.getY() + (this.getStyleSet().getLineHeight() * i),
+      const elem = new Text(this.getStyleSet(),
+        this.getX() + this.padding[3] - (width / 2),
+        this.getY() + this.padding[0] + (this.getStyleSet().getLineHeight() * i),
         text_parts[i]);
       elem.setStyleSet(this.getStyleSet());
       out += elem.getMarkup();
@@ -50,11 +54,15 @@ export default class TextBox extends Element {
 
   public getHeight(lines?: number): number {
     if (typeof lines !== "number") {
-      const text_parts: string[] = Text.chopTextToFitWidth(this.text,
-        this.getStyleSet().getFontSize(), this.getWidth());
+      const text_parts: string[] = this.getTextParts();
       lines = text_parts.length;
     }
-    return lines * this.getStyleSet().getLineHeight();
+    return (lines * this.getStyleSet().getLineHeight()) + this.padding[0] + this.padding[2];
+  }
+
+
+  public getPadding(): number[] {
+    return this.padding;
   }
 
 
@@ -63,8 +71,29 @@ export default class TextBox extends Element {
   }
 
 
+  private getTextParts(): string[] {
+    return Text.chopTextToFitWidth(this.text,
+      this.getStyleSet().getFontSize(),
+      this.getWidth() - this.padding[1] - this.padding[3],
+      this.word_wrap);
+  }
+
+
   public getWidth(): number {
     return this.width;
+  }
+
+
+  public getWordWrap(): boolean {
+    return this.word_wrap;
+  }
+
+
+  public setPadding(arg: number[]): void {
+    if (arg.length !== 4) {
+      throw new Error("must be a 4-element number array");
+    }
+    this.padding = arg;
   }
 
 
@@ -75,6 +104,11 @@ export default class TextBox extends Element {
 
   public setWidth(arg: number): void {
     this.width = arg;
+  }
+
+
+  public setWordWrap(arg: boolean): void {
+    this.word_wrap = arg;
   }
 
 }
