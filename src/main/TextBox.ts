@@ -41,9 +41,10 @@ export default class TextBox extends Element {
     rect.setStyleSet(this.getStyleSet());
     out += rect.getMarkup();
     for (let i = 0; i < text_parts.length; i += 1) {
+      const est_text_width = Text.estimateTextWidth(text_parts[i], this.getStyleSet().getFontSize());
       const elem = new Text(this.getStyleSet(),
-        this.getX() + this.padding[3] - (width / 2),
-        this.getY() + this.padding[0] + (this.getStyleSet().getLineHeight() * i),
+        this.getX() + this.padding[3] - (width / 2) + (est_text_width / 2),
+        this.getY() + this.padding[0] - (height / 2) + (this.getStyleSet().getLineHeight() * (i + 1.5)),
         text_parts[i]);
       elem.setStyleSet(this.getStyleSet());
       out += elem.getMarkup();
