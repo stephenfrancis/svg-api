@@ -36,7 +36,8 @@ export default class Connector extends Element {
       return null;
     }
     const a = new Arrowhead(this.getStyleSet(), to_path_point[0], to_path_point[1],
-      Math.atan2(to_path_point[1] - from_path_point[1], to_path_point[0] - from_path_point[0]) * 180 / Math.PI);
+      Math.atan2(to_path_point[1] - from_path_point[1], to_path_point[0] - from_path_point[0]) * 180 / Math.PI,
+      this.arrowhead_size);
     return a.getMarkup();
   }
 
