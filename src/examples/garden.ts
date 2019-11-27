@@ -1,10 +1,7 @@
 
 import * as SVG from "../main/Entry";
-// import Diagram from "../main/Diagram";
-// import FileManager from "../main/FileManager";
-// import StyleSet from "../main/StyleSet";
 
-const d: SVG.Diagram = new Diagram();
+const d: SVG.Diagram = new SVG.Diagram();
 
 const    top_left : [ number, number ] = [  33,   0 ];
 const    top_right: [ number, number ] = [ 865,   0 ];
@@ -54,13 +51,13 @@ const getCircleYFromX = (x_pos: number, bottom_side?: boolean) => {
   return patio_centre[1] + (bottom_side ? 1 : -1) * Math.sqrt((radius + 10) ** 2 - (x_pos - patio_centre[0]) ** 2);
 }
 
-d.main.setNewElementStyleSet(new StyleSet({
+d.main.setNewElementStyleSet(new SVG.StyleSet({
   "stroke-width": "0px",
   "fill"        : "#ddd",
 }));
 const patio = d.main.addCircle(patio_centre[0], patio_centre[1], radius);
 
-d.main.setNewElementStyleSet(new StyleSet({
+d.main.setNewElementStyleSet(new SVG.StyleSet({
   "stroke"      : "#000",
   "stroke-width": "2px",
   "fill"        : "#ddd",
@@ -77,7 +74,7 @@ const shed = d.main.addRectangle(
   shed_size[1]);
 
 
-d.main.setNewElementStyleSet(new StyleSet({
+d.main.setNewElementStyleSet(new SVG.StyleSet({
   "stroke"      : "#bf6c42",
   "stroke-width": "20px",
   "fill"        : "#fff",
@@ -142,7 +139,7 @@ d.main.addPath(planter_3_coords_0_x, planter_3_coords_0_y)
 
 // d.main.addStraightLine(planter_3_coords_5_x - 100, planter_3_coords_6_y, planter_3_coords_5_x + 10, planter_3_coords_6_y);
 
-d.main.setNewElementStyleSet(new StyleSet({
+d.main.setNewElementStyleSet(new SVG.StyleSet({
   "stroke"      : "#000",
   "stroke-width": "2px",
   "fill"        : "#42abd4",
@@ -156,7 +153,7 @@ const hottub_centre = [
 d.main.addRectangle(hottub_centre[0], hottub_centre[1], hottub_size[0], hottub_size[1]);
 
 
-d.main.setNewElementStyleSet(new StyleSet({
+d.main.setNewElementStyleSet(new SVG.StyleSet({
   "stroke"   : "#000",
   "font-size": "24px",
 }));
@@ -164,7 +161,7 @@ d.main.addText(shed_centre[0] - 40, shed_centre[1] - 40, "shed");
 d.main.addText(patio_centre[0] - 40, patio_centre[1] - 40, "patio");
 d.main.addText(hottub_centre[0] - 40, hottub_centre[1] + 40, "hot-tub");
 
-d.main.setNewElementStyleSet(new StyleSet({
+d.main.setNewElementStyleSet(new SVG.StyleSet({
   "stroke"   : "#000",
   "font-size": "18px",
 }));
@@ -173,8 +170,8 @@ const drawDistance = (from_x: number, from_y: number, to_x: number, to_y: number
   d.main.addStraightLine(from_x, from_y, to_x, to_y);
   const dist: number = Math.ceil(Math.sqrt((to_x - from_x) ** 2 + (to_y - from_y) ** 2));
   d.main.addText((from_x + to_x) / 2 + 20, (from_y + to_y) / 2 + 30, String(dist));
-  d.main.addArrowhead(from_x, from_y, Math.atan2(from_y - to_y, from_x - to_x) * 180 / Math.PI);
-  d.main.addArrowhead(  to_x,   to_y, Math.atan2(to_y - from_y, to_x - from_x) * 180 / Math.PI);
+  // d.main.addArrowhead(from_x, from_y, Math.atan2(from_y - to_y, from_x - to_x) * 180 / Math.PI);
+  // d.main.addArrowhead(  to_x,   to_y, Math.atan2(to_y - from_y, to_x - from_x) * 180 / Math.PI);
 };
 
 drawDistance(shed_centre[0] - shed_size[0]  / 2, shed_centre[1], shed_centre[0] + shed_size[0] / 2, shed_centre[1]);
@@ -202,5 +199,5 @@ drawDistance(640, 800, 740, 700);
 drawDistance(planter_1_coords_0_x, 100, planter_1_coords_1_x, 100);
 drawDistance(420, planter_1_coords_0_y, 420, planter_1_coords_2_y);
 
-const fm = new FileManager("./build/");
+const fm = new SVG.FileManager("./build/");
 fm.saveAsSVG (d, "garden");
