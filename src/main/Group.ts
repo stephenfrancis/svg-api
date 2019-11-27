@@ -1,7 +1,5 @@
 
-import Arrowhead from "./Arrowhead";
 import Circle from "./Circle";
-import Connector from "./Connector";
 import Element from "./Element";
 import Ellipse from "./Ellipse";
 import Path from "./Path";
@@ -9,11 +7,10 @@ import Rectangle from "./Rectangle";
 import StraightLine from "./StraightLine";
 import StyleSet from "./StyleSet";
 import Text from "./Text";
-import TextBox from "./TextBox";
 import * as Types from "./Types";
 
 
-export default class Group  extends Element{
+export default class Group extends Element {
   private current_styleset: StyleSet;
   private elements: Element[];
   private positioned: boolean;
@@ -26,24 +23,8 @@ export default class Group  extends Element{
   }
 
 
-  public addArrowhead(x_pos: number, y_pos: number, angle: number, size?: number): Arrowhead {
-    const element = new Arrowhead(this.current_styleset, x_pos, y_pos, angle, size);
-    this.elements.push(element);
-    return element;
-  }
-
-
   public addCircle(x_pos: number, y_pos: number, rad: number): Circle {
     const element = new Circle(this.current_styleset, x_pos, y_pos, rad);
-    this.elements.push(element);
-    return element;
-  }
-
-
-  public addConnector(x_pos: number, y_pos: number, start_arrowhead?: Types.ArrowheadStyle,
-      end_arrowhead?: Types.ArrowheadStyle, path_style?: Types.PathStyle): Connector {
-    const element = new Connector(this.current_styleset, x_pos, y_pos,
-      start_arrowhead, end_arrowhead, path_style);
     this.elements.push(element);
     return element;
   }
@@ -86,13 +67,6 @@ export default class Group  extends Element{
 
   public addText(x_pos: number, y_pos: number, text: string): Text {
     const element = new Text(this.current_styleset, x_pos, y_pos, text);
-    this.elements.push(element);
-    return element;
-  }
-
-
-  public addTextBox(x_pos: number, y_pos: number, text: string, width?: number): TextBox {
-    const element = new TextBox(this.current_styleset, x_pos, y_pos, text, width);
     this.elements.push(element);
     return element;
   }

@@ -7,10 +7,11 @@
       "dom"
     ],
     "module": "commonjs",
-    "outDir": "build/",
+    "outDir": "../build/",
     "target": "es5",
   },
   "exclude": [
-    "node_modules",
+    "__tests__",
+    "../node_modules",
   ],
 }

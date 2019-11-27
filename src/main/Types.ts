@@ -1,5 +1,4 @@
 
-export type ArrowheadStyle = "none" | "basic";
 
 
 export interface Extremes {
@@ -8,6 +7,3 @@ export interface Extremes {
   x_max: number;
   y_max: number;
 }
-
-
-export type PathStyle = "right-angled" | "quad-bezier";

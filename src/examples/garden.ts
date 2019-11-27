@@ -1,9 +1,10 @@
 
-import Diagram from "../main/Diagram";
-import FileManager from "../main/FileManager";
-import StyleSet from "../main/StyleSet";
+import * as SVG from "../main/Entry";
+// import Diagram from "../main/Diagram";
+// import FileManager from "../main/FileManager";
+// import StyleSet from "../main/StyleSet";
 
-const d: Diagram = new Diagram();
+const d: SVG.Diagram = new Diagram();
 
 const    top_left : [ number, number ] = [  33,   0 ];
 const    top_right: [ number, number ] = [ 865,   0 ];
