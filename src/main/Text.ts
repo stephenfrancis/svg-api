@@ -84,7 +84,7 @@ export default class Text extends Element {
   public getMarkup(): string {
     return "<text"
      + " x='" + (this.getX() - (this.estimateWidth()  / 2)) + "'"
-     + " y='" + (this.getY() - (this.estimateHeight() / 2)) + "'"
+     + " y='" + (this.getY() - (this.estimateHeight()    )) + "'"
      + " " + this.getStyleSet().getStyleDefinition()
      + this.getTransformMarkup()
      + " >" + this.text + "</text>";
@@ -104,25 +104,25 @@ export default class Text extends Element {
 
 
 const latin_glyph_widths = {
-  "65": 7.2, // A
-  "66": 6.6,
-  "67": 6.6,
-  "68": 7.2, // D
-  "69": 6.1,
-  "70": 5.6,
-  "71": 7.1, // G
-  "72": 7.1,
-  "73": 3.3,
-  "74": 3.8, // J
-  "75": 7.1,
-  "76": 6.1,
-  "77": 8.8, // M
-  "78": 7.1,
-  "79": 7.1,
-  "80": 5.6, // P
-  "81": 7.2,
-  "82": 6.6,
-  "83": 5.6, // S
+   "65": 7.2, // A
+   "66": 6.6,
+   "67": 6.6,
+   "68": 7.2, // D
+   "69": 6.1,
+   "70": 5.6,
+   "71": 7.1, // G
+   "72": 7.1,
+   "73": 3.3,
+   "74": 3.8, // J
+   "75": 7.1,
+   "76": 6.1,
+   "77": 8.8, // M
+   "78": 7.1,
+   "79": 7.1,
+   "80": 5.6, // P
+   "81": 7.2,
+   "82": 6.6,
+   "83": 5.6, // S
    "84": 6.2,
    "85": 7.1,
    "86": 7.1, // V

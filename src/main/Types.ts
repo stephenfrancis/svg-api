@@ -1,6 +1,4 @@
 
-
-
 export interface Extremes {
   x_min: number;
   y_min: number;

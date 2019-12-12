@@ -2,6 +2,7 @@
   "name": "svg-api",
   "version": "0.0.1",
   "main": "./dist/index.min.js",
+  "types": "./src/main/Entry.ts",
   "description": "Object Model for Generating SVG Diagrams",
   "scripts": {
     "build": "npx parcel build src/main/Entry.ts -d dist --target node --cache-dir build/cache --out-file index.min.js ",
