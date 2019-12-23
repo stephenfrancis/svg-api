@@ -31,10 +31,20 @@ export default class FileManager {
   }
 
 
-  public saveAsHTML(d: Diagram, filename: string): void {
+  public getEncoding(): string {
+    return this.encoding;
+  }
+
+
+  public getPath(): string {
+    return this.path;
+  }
+
+
+  public saveAsHTML(d: Diagram, filename_excl_suffix: string): void {
     const title: string = d.getTitle();
     Fs.writeFileSync(
-      this.path + filename + ".html",
+      this.path + filename_excl_suffix + ".html",
       head1 + title + head2 + title + head3 + d.getMarkup() + foot,
       {
         encoding: this.encoding,
@@ -43,14 +53,24 @@ export default class FileManager {
   }
 
 
-  public saveAsSVG(d: Diagram, filename: string): void {
+  public saveAsSVG(d: Diagram, filename_excl_suffix: string): void {
     Fs.writeFileSync(
-      this.path + filename + ".svg",
+      this.path + filename_excl_suffix + ".svg",
       d.getMarkup(),
       {
         encoding: this.encoding,
       }
     );
+  }
+
+
+  public setEncoding(encoding: string): void {
+    this.encoding = encoding;
+  }
+
+
+  public setPath(path: string): void {
+    this.path = path;
   }
 
 }

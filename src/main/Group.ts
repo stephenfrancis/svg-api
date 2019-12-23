@@ -7,6 +7,7 @@ import Rectangle from "./Rectangle";
 import StraightLine from "./StraightLine";
 import StyleSet from "./StyleSet";
 import Text from "./Text";
+import TextBox from "./TextBox";
 import * as Types from "./Types";
 
 
@@ -67,6 +68,13 @@ export default class Group extends Element {
 
   public addText(x_pos: number, y_pos: number, text: string): Text {
     const element = new Text(this.current_styleset, x_pos, y_pos, text);
+    this.elements.push(element);
+    return element;
+  }
+
+
+  public addTextBox(x_pos: number, y_pos: number, text: string, width?: number): TextBox {
+    const element = new TextBox(this.current_styleset, x_pos, y_pos, text, width);
     this.elements.push(element);
     return element;
   }

@@ -1,7 +1,8 @@
 {
   "name": "svg-api",
   "version": "0.0.1",
-  "main": "./dist/index.min.js",
+  "main_parcel": "./dist/index.min.js",
+  "main": "./build/main/Entry.js",
   "types": "./src/main/Entry.ts",
   "description": "Object Model for Generating SVG Diagrams",
   "scripts": {
