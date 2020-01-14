@@ -25,9 +25,9 @@ export default class FileManager {
   private path: string;
   private encoding: string;
 
-  constructor(path?: string, encoding?: string) {
-    this.path = path || "";
-    this.encoding = encoding || "utf8";
+  constructor(path: string, encoding?: string) {
+    this.setPath(path);
+    this.setEncoding(encoding || "utf8");
   }
 
 
@@ -70,6 +70,12 @@ export default class FileManager {
 
 
   public setPath(path: string): void {
+    if (path.lastIndexOf("/") !== (path.length - 1)) {
+      path += "/"; // ensure path ends with "/"
+    }
+    if (!Fs.statSync(path).isDirectory()) {
+      throw new Error(`${path} must be a directory - it isn't`);
+    }
     this.path = path;
   }
 

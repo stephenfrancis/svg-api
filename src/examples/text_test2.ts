@@ -2,7 +2,7 @@
 import Diagram from "../main/Diagram";
 import FileManager from "../main/FileManager";
 import StyleSet from "../main/StyleSet";
-import Text from "../main/Text";
+import TextBox from "../main/TextBox";
 
 const d: Diagram = new Diagram();
 
@@ -26,7 +26,7 @@ for (let i = 0; i < 50; i += 1) {
   // d.main.addText(50, (i * 20), String(i + 64));
   d.main.addText(200, (i * 30) + 13, word);
 
-  const est_width = Text.estimateTextWidth(word, 10);
+  const est_width = TextBox.estimateTextWidth(word, 10);
   d.main.addRectangle(200, (i * 30), est_width, 15);
 }
 
