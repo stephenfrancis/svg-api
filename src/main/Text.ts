@@ -1,4 +1,3 @@
-
 import Element from "./Element";
 import StyleSet from "./StyleSet";
 import * as Types from "./Types";
@@ -11,44 +10,46 @@ export default class Text extends Element {
     this.text = text;
   }
 
-/*
   public getExtremes(): Types.Extremes {
-    const width: number = this.getWidth();
-    const height: number = this.getHeight();
     return {
-      x_min: (this.getX() - (width  / 2)),
-      y_min: (this.getY() - (height / 2)),
-      x_max: (this.getX() + (width  / 2)),
-      y_max: (this.getY() + (height / 2)),
+      x_min: this.getX(),
+      y_min: this.getY(),
+      x_max: this.getX() + 200,
+      y_max: this.getY() + 50,
     };
   }
 
-  public getHeight(): number {
-    return this.height;
-  }
-*/
-
+  // public getHeight(): number {
+  //   return this.height;
+  // }
 
   public getMarkup(): string {
-    return "<text"
-     + " x='" + (this.getX()) + "'"
-     + " y='" + (this.getY()) + "'"
-     + " " + this.getStyleSet().getStyleDefinition()
-     + this.getTransformMarkup()
-     + " >" + this.text + "</text>";
+    return (
+      "<text" +
+      " x='" +
+      this.getX() +
+      "'" +
+      " y='" +
+      this.getY() +
+      "'" +
+      " " +
+      this.getStyleSet().getStyleDefinition() +
+      this.getTransformMarkup() +
+      " >" +
+      this.text +
+      "</text>"
+    );
   }
-
 
   public getText(): string {
     return this.text;
   }
 
-
   public setText(arg: string): void {
     this.text = arg;
   }
 
-/*
+  /*
   public getWidth(): number {
     return this.width;
   }
@@ -63,5 +64,4 @@ export default class Text extends Element {
     this.width = arg;
   }
 */
-
 }
