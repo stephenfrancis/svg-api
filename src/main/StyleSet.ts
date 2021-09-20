@@ -1,23 +1,34 @@
-
-type AttributeName = "fill" | "fill-opacity" | "font-size" | "stroke" | "stroke-width";
+type AttributeName =
+  | "fill"
+  | "fill-opacity"
+  | "font-size"
+  | "stroke"
+  | "stroke-width"
+  | "stroke-linejoin";
 type AttributeSet = { [A in AttributeName]: ValidationName };
-type ValidationName = "colour" | "length" | "percentage";
+type ValidationName = "colour" | "length" | "percentage" | "linejoin";
 type ValidationSet = { [valid_set: string]: RegExp[] };
 
 const attr_set: AttributeSet = {
-  "fill"        : "colour",
+  fill: "colour",
   "fill-opacity": "percentage",
-  "font-size"   : "length",
-  "stroke"      : "colour",
+  "font-size": "length",
+  stroke: "colour",
   "stroke-width": "length",
+  "stroke-linejoin": "linejoin",
 };
 
 const val_set: ValidationSet = {
-  "colour": [ /^#[\da-fA-F]{3}$/, /^#[\da-fA-F]{6}$/, /rgb\(\d{1,2},\d{1,2},\d{1,2}\)$/, /^none$/ ],
-  "length": [ /^\d+px$/ ],
-  "percentage": [ /^\d+(\.\d+)?%$/ ],
+  colour: [
+    /^#[\da-fA-F]{3}$/,
+    /^#[\da-fA-F]{6}$/,
+    /rgb\(\d{1,2},\d{1,2},\d{1,2}\)$/,
+    /^none$/,
+  ],
+  length: [/^\d+px$/],
+  percentage: [/^\d+(\.\d+)?%$/],
+  linejoin: [/^arcs$/, /^bevel$/, /^miter$/, /^miter-clip$/, /^round$/],
 };
-
 
 export default class StyleSet {
   private attributes: { [A in AttributeName]?: string };
@@ -26,45 +37,41 @@ export default class StyleSet {
     this.attributes = initial_attributes || {};
   }
 
-
   public getAttribute(attr_name: AttributeName): string {
     return this.attributes[attr_name];
   }
-
 
   public getFontSize(): number {
     return parseInt(this.getAttribute("font-size"), 10);
   }
 
-
   public static getInitialStyleSet(): StyleSet {
     return new StyleSet({
-      "stroke"      : "#000000",
+      stroke: "#000000",
       "stroke-width": "1px",
-      "fill"        : "#808080",
-      "font-size"   : "16px",
+      fill: "#808080",
+      "font-size": "16px",
     });
   }
-
 
   public getLineHeight(): number {
     return parseInt(this.getAttribute("font-size"), 10);
   }
 
-
   public getStyleDefinition(unquoted?: boolean): string {
     const quote_char: string = unquoted ? "" : "'";
     return Object.keys(this.attributes)
-      .map((attr_name: string) => `${attr_name}=${quote_char}${this.attributes[attr_name]}${quote_char}`)
+      .map(
+        (attr_name: string) =>
+          `${attr_name}=${quote_char}${this.attributes[attr_name]}${quote_char}`
+      )
       .join(" ");
   }
-
 
   public setAttribute(attr_name: AttributeName, value: string): void {
     this.validateAttribute(attr_name, value);
     this.attributes[attr_name] = value;
   }
-
 
   public validateAs(val_type: ValidationName, value: string): boolean {
     let out: boolean = false;
@@ -78,16 +85,15 @@ export default class StyleSet {
     return out;
   }
 
-
   public validateAttribute(attr_name: AttributeName, value: string): void {
     const val_type: ValidationName = attr_set[attr_name];
     if (!val_type) {
       throw new Error(`unrecognized style attribute name: ${attr_name}`);
     }
     if (!this.validateAs(val_type, value)) {
-      throw new Error(`value '${value}' of style attribute: ${attr_name} is not a valid ${val_type}`);
+      throw new Error(
+        `value '${value}' of style attribute: ${attr_name} is not a valid ${val_type}`
+      );
     }
   }
-
-
 }
